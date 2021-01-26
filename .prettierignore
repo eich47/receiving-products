@@ -1,0 +1,9 @@
+*.map
+*.svg
+*.png
+*.jpg
+.prettierignore
+.eslintcache
+dist/*
+.cache
+node_modules

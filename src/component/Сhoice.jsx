@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const Сhoice = ({title}) => {
+const Choice = ({title}) => {
   return (
     <div>
       <h2>{title}</h2>
     </div>
-  );
-};
+  )
+}
 
-export default Сhoice;
+export default Choice
