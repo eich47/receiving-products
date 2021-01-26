@@ -1,7 +1,12 @@
 import React from 'react'
+import SectionTitle from './SectionTitle'
 
 const PickUp = () => {
-  return <div>самовывоз</div>
+  return (
+    <div>
+      <SectionTitle title={`Самовывоз`} />
+    </div>
+  )
 }
 
 export default PickUp
