@@ -1,9 +1,9 @@
 import {getCityData} from './selector.gateway'
 
 export const CITY_RECEIVED = 'SELECTOR/CITY_RECEIVED'
-export const GET_ADDRESS_BY_CITY = 'SELECTOR/GET_ADDRESS_BY_CITY'
 export const SET_SELECTED_CITY = 'SELECTOR/SET_SELECTED_CITY'
 export const SET_SELECTED_STREET_HOUSE = 'SELECTOR/SET_SELECTED_STREET_HOUSE'
+export const SET_PICKUP_PAYMENT_TYPE = 'SELECTOR/SET_PICKUP_PAYMENT_TYPE'
 
 //помесить города в стор
 export const cityReceived = (cityData) => {
@@ -42,6 +42,16 @@ export const setSelectedStreetHouse = (addressId) => {
     type: SET_SELECTED_STREET_HOUSE,
     payload: {
       addressId,
+    },
+  }
+}
+
+//установить вариант оплаты для самовывозе (карта/наличные)
+export const setPickUpPaymentType = (paymentType) => {
+  return {
+    type: SET_PICKUP_PAYMENT_TYPE,
+    payload: {
+      paymentType,
     },
   }
 }

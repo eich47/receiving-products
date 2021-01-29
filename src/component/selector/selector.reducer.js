@@ -1,5 +1,6 @@
 import {
   CITY_RECEIVED,
+  SET_PICKUP_PAYMENT_TYPE,
   SET_SELECTED_CITY,
   SET_SELECTED_STREET_HOUSE,
 } from './selector.action'
@@ -8,6 +9,7 @@ const initialData = {
   addressData: [],
   selectedCity: null,
   selectedFullAddress: null, //город, улица, дом
+  selectedPaymentType: 'card', // какой вариант оплаты выбрал пользователь (наличные/карта), карта по умолчанию
 }
 
 const selectorReducer = (state = initialData, action) => {
@@ -46,6 +48,14 @@ const selectorReducer = (state = initialData, action) => {
         selectedFullAddress: newSelectedStreetHouse,
       }
     }
+
+    case SET_PICKUP_PAYMENT_TYPE: {
+      return {
+        ...state,
+        selectedPaymentType: action.payload.paymentType,
+      }
+    }
+
     default:
       return state
   }
