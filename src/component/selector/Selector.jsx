@@ -8,14 +8,19 @@ class Selector extends React.Component {
     this.props.fetchCityData()
   }
 
+  handlerClick = (city) => {
+    this.props.setSelectedCity(city)
+    this.props.setSelectedStreetHouse(null)
+  }
+
   render() {
-    const {cityData, title, setSelectedCity} = this.props
+    const {cityData, title} = this.props
     return (
       <div>
         {title}
         <ul>
           {cityData.map((city) => (
-            <li key={city} onClick={() => setSelectedCity(city)}>
+            <li key={city} onClick={() => this.handlerClick(city)}>
               <button type="button">{city}</button>
             </li>
           ))}
@@ -34,6 +39,7 @@ const mapState = (state) => {
 const mapDispatch = {
   fetchCityData: selectorActions.fetchCityData,
   setSelectedCity: selectorActions.setSelectedCity,
+  setSelectedStreetHouse: selectorActions.setSelectedStreetHouse,
 }
 
 const connector = connect(mapState, mapDispatch)

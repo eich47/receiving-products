@@ -43,9 +43,14 @@ const selectorReducer = (state = initialData, action) => {
           return false
         }
       })
+
+      let fullAddress = newSelectedStreetHouse
+      if (fullAddress.length === 0) {
+        fullAddress = null
+      }
       return {
         ...state,
-        selectedFullAddress: newSelectedStreetHouse,
+        selectedFullAddress: fullAddress,
       }
     }
 
