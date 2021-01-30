@@ -1,24 +1,22 @@
 import React from 'react'
 import SectionTitle from '../SectionTitle'
-import SelectorPickUpPay from '../selector/SelectorPickUpPay'
 import {connect} from 'react-redux'
 import PaymentCard from './PaymentCard'
 import PaymentCash from './PaymentCash'
-import Order from '../order/Order'
 import * as paymentTypes from './paymentTypes'
+import SelectorDeliveryPay from '../selector/SelectorDeliveryPay'
 
-const PickUpPayment = ({paymentType, textForUser}) => {
+const DeliveryPayment = ({paymentType, textForUser}) => {
   return (
     <div>
       <SectionTitle title={`Способ оплаты`} />
-      <SelectorPickUpPay />
+      <SelectorDeliveryPay />
       {paymentType === paymentTypes.paymentByCard && (
         <PaymentCard text={textForUser} />
       )}
       {paymentType === paymentTypes.paymentByCash && (
         <PaymentCash text={textForUser} />
       )}
-      <Order />
     </div>
   )
 }
@@ -31,4 +29,4 @@ const mapState = (state) => {
 
 const connector = connect(mapState, null)
 
-export default connector(PickUpPayment)
+export default connector(DeliveryPayment)
