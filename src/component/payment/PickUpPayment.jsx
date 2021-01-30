@@ -4,6 +4,8 @@ import SelectorPickUpPay from '../selector/SelectorPickUpPay'
 import {connect} from 'react-redux'
 import PaymentCard from './PaymentCard'
 import PaymentCash from './PaymentCash'
+import Order from '../order/Order'
+import * as paymentTypes from './paymentTypes'
 
 const textForUser = `Товар на складе будет привязан к номеру телефона. В пункте выдачи назовите номер телефона, чтобы получить ваш заказ.`
 const PickUpPayment = ({paymentType}) => {
@@ -11,8 +13,13 @@ const PickUpPayment = ({paymentType}) => {
     <div>
       <SectionTitle title={`Способ оплаты`} />
       <SelectorPickUpPay />
-      {paymentType === 'card' && <PaymentCard text={textForUser} />}
-      {paymentType === 'cash' && <PaymentCash text={textForUser} />}
+      {paymentType === paymentTypes.paymentByCard && (
+        <PaymentCard text={textForUser} />
+      )}
+      {paymentType === paymentTypes.paymentByCash && (
+        <PaymentCash text={textForUser} />
+      )}
+      <Order />
     </div>
   )
 }

@@ -20,3 +20,13 @@ export const selectAddressByCity = (state) => {
     return loc.city === selectedCity
   })
 }
+
+//выбран ли адресс
+export const isSelectAddressSelector = (state) => {
+  return state.selector.selectedFullAddress !== null
+}
+
+//способ оплаты
+export const selectedPaymentSelector = (state) => {
+  return state.selector.selectedPaymentType
+}
