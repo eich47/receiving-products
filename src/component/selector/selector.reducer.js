@@ -1,5 +1,6 @@
 import {
   CITY_RECEIVED,
+  CLEAR_EXIST_ADDRESS_DATA,
   SET_PICKUP_PAYMENT_TYPE,
   SET_SELECTED_CITY,
   SET_SELECTED_STREET_HOUSE,
@@ -58,6 +59,13 @@ const selectorReducer = (state = initialData, action) => {
       return {
         ...state,
         selectedPaymentType: action.payload.paymentType,
+      }
+    }
+
+    case CLEAR_EXIST_ADDRESS_DATA: {
+      return {
+        ...state,
+        addressData: [],
       }
     }
 

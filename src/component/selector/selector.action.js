@@ -4,6 +4,7 @@ export const CITY_RECEIVED = 'SELECTOR/CITY_RECEIVED'
 export const SET_SELECTED_CITY = 'SELECTOR/SET_SELECTED_CITY'
 export const SET_SELECTED_STREET_HOUSE = 'SELECTOR/SET_SELECTED_STREET_HOUSE'
 export const SET_PICKUP_PAYMENT_TYPE = 'SELECTOR/SET_PICKUP_PAYMENT_TYPE'
+export const CLEAR_EXIST_ADDRESS_DATA = 'SELECTOR/CLEAR_EXIST_ADDRESS_DATA'
 
 //помесить города в стор
 export const cityReceived = (cityData) => {
@@ -20,6 +21,7 @@ export const fetchCityData = () => {
   return function (dispatch, getState) {
     const {selectedCity} = getState().selector
     getCityData().then((cityData) => {
+      dispatch(clearExistAddressData())
       dispatch(cityReceived(cityData))
       dispatch(setSelectedCity(selectedCity))
     })
@@ -53,5 +55,12 @@ export const setPickUpPaymentType = (paymentType) => {
     payload: {
       paymentType,
     },
+  }
+}
+
+//удалим существующие данные
+export const clearExistAddressData = () => {
+  return {
+    type: CLEAR_EXIST_ADDRESS_DATA,
   }
 }
