@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PaymentInfo = ({text}) => {
-  return <div>{text}</div>
+  return <div className="mt-3">{text}</div>
 }
 
 export default PaymentInfo

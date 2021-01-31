@@ -61,9 +61,11 @@ const Order = ({
   }
 
   return (
-    <div>
-      <button disabled={getErrors().length}>заказать</button>
-      <div>
+    <div className="mt-3 d-flex">
+      <button className="btn btn-primary" disabled={getErrors().length}>
+        заказать
+      </button>
+      <div className="ml-4">
         {getErrors().length ? START_MSG : ``}
         {getErrorsMessage(getErrors())}
       </div>

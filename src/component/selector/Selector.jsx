@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {citySelector} from './selector.selector'
+import {citySelector, getSelectedCitySelector} from './selector.selector'
 import * as selectorActions from './selector.action'
+
+const SELECTED_MENU_ITEM = 'red'
 
 class Selector extends React.Component {
   componentDidMount() {
@@ -13,15 +15,27 @@ class Selector extends React.Component {
     this.props.setSelectedStreetHouse(null)
   }
 
+  styleSelectedMenuItem = {borderColor: SELECTED_MENU_ITEM}
+
   render() {
-    const {cityData, title} = this.props
+    const {cityData, title, selectedCity} = this.props
     return (
-      <div>
-        {title}
-        <ul>
+      <div className="mt-3">
+        <span>{title}</span>
+        <ul className="nav nav-pills">
           {cityData.map((city) => (
-            <li key={city} onClick={() => this.handlerClick(city)}>
-              <button type="button">{city}</button>
+            <li
+              className="nav-item mr-2"
+              key={city}
+              onClick={() => this.handlerClick(city)}
+            >
+              <button
+                className="btn btn-outline-primary"
+                type="button"
+                style={city === selectedCity ? this.styleSelectedMenuItem : {}}
+              >
+                {city}
+              </button>
             </li>
           ))}
         </ul>
@@ -33,6 +47,7 @@ class Selector extends React.Component {
 const mapState = (state) => {
   return {
     cityData: citySelector(state),
+    selectedCity: getSelectedCitySelector(state),
   }
 }
 

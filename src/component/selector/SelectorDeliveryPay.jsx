@@ -10,15 +10,18 @@ function SelectorPickUpPay({setPickUpPaymentType}) {
 
   return (
     <div>
-      <ul>
+      <ul className="nav">
         {payment.map((paymentItem) => (
           <li
+            className="nav-item mr-2"
             key={paymentItem.id}
             onClick={() => {
               setPickUpPaymentType(paymentItem.code)
             }}
           >
-            <button type="button">{paymentItem.name}</button>
+            <button type="button" className="btn btn-outline-primary">
+              {paymentItem.name}
+            </button>
           </li>
         ))}
       </ul>

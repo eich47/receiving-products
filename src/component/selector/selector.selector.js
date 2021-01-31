@@ -30,3 +30,14 @@ export const isSelectAddressSelector = (state) => {
 export const selectedPaymentSelector = (state) => {
   return state.selector.selectedPaymentType
 }
+
+//получить выбранный год
+export const getSelectedCitySelector = (state) => {
+  return state.selector.selectedCity
+}
+//получить выбранный адресс (улицу и дом)
+export const getFullAddressSelector = (state) => {
+  return state.selector.selectedFullAddress !== null
+    ? state.selector.selectedFullAddress[0]
+    : {}
+}

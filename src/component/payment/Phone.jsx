@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import * as paymentAction from './payment.action'
 import {IMaskInput} from 'react-imask'
 
-const SUCCESS_CLASS = 'success'
-const ERROR_CLASS = 'error'
+const SUCCESS_CLASS = 'is-valid'
+const ERROR_CLASS = 'is-invalid'
+const INPUT_CLASS = 'form-control'
 
 const Phone = ({setPhone}) => {
   const [isCompleted, setIsComplete] = useState(null)
@@ -23,14 +24,16 @@ const Phone = ({setPhone}) => {
 
   function getClass() {
     if (isCompleted === null) {
-      return null
+      return INPUT_CLASS
     }
-    return isCompleted ? SUCCESS_CLASS : ERROR_CLASS
+    return isCompleted
+      ? `${INPUT_CLASS} ${SUCCESS_CLASS}`
+      : `${INPUT_CLASS} ${ERROR_CLASS}`
   }
 
   return (
-    <div>
-      <h4>введите номер телефона</h4>
+    <div className="mt-3">
+      <h4 className="h6">введите номер телефона</h4>
       <IMaskInput
         mask={'+{7}(000)000-00-00'}
         onAccept={() => handleChange()}

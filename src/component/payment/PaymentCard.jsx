@@ -11,7 +11,7 @@ const PaymentCard = (props) => {
     props.setPhone(null)
   })
   return (
-    <div>
+    <div className="mt-3">
       <Card />
       <Phone />
       <PaymentInfo {...props} />

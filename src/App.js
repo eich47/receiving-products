@@ -1,6 +1,6 @@
 import React from 'react'
-import './App.css'
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {BrowserRouter, Link, NavLink, Route, Switch} from 'react-router-dom'
 import Choice from './component/Сhoice'
 import Delivery from './component/Delivery'
 import PickUp from './component/PickUp'
@@ -9,20 +9,30 @@ import store from './store'
 
 function App() {
   return (
-    <div>
+    <div className="container w-50">
       <Provider store={store}>
         <BrowserRouter>
-          <h1>Выберите способ получения товара</h1>
-          <ul>
-            <li>
-              <Link to="/">
+          <h1 className="h1">Выберите способ получения товара</h1>
+          <ul className="nav nav-pills my-4">
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/"
+                className="nav-link"
+                activeClassName="active"
+              >
                 <Choice title={`Самовывоз`} />
-              </Link>
+              </NavLink>
             </li>
-            <li>
-              <Link to="/delivery-by-courier">
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/delivery-by-courier"
+                className="nav-link"
+                activeClassName="active"
+              >
                 <Choice title={`Доставка курьером`} />
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <Switch>

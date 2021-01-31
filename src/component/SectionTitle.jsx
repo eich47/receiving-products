@@ -2,9 +2,9 @@ import React from 'react'
 
 const SectionTitle = ({title}) => {
   return (
-    <div>
-      <h3>{title}</h3>
-    </div>
+    <>
+      <h3 className="h3 my-3">{title}</h3>
+    </>
   )
 }
 

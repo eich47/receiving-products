@@ -1,26 +1,39 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {selectAddressByCity} from './selector.selector'
+import {selectAddressByCity, getFullAddressSelector} from './selector.selector'
 import * as selectorActions from './selector.action'
 
+const SELECTED_MENU_ITEM = 'red'
+
 class SelectorStreetHouse extends React.Component {
+  styleSelectedMenuItem = {borderColor: SELECTED_MENU_ITEM}
+
   render() {
-    const {title, addressData, setStreetHouse} = this.props
+    const {title, addressData, setStreetHouse, selectedFullAddress} = this.props
     if (addressData === null) {
       return null
     }
     return (
-      <div>
+      <div className="mt-3">
         {title}
-        <ul>
+        <ul className="nav">
           {addressData.map((loc) => (
             <li
+              className="nav-item mr-2"
               key={loc.id}
               onClick={() => {
                 setStreetHouse(loc.id)
               }}
             >
-              <button type="button">
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                style={
+                  loc.id === selectedFullAddress.id
+                    ? this.styleSelectedMenuItem
+                    : {}
+                }
+              >
                 {loc.address.city.street}, {loc.address.city.house}
               </button>
             </li>
@@ -34,6 +47,7 @@ class SelectorStreetHouse extends React.Component {
 const mapState = (state) => {
   return {
     addressData: selectAddressByCity(state),
+    selectedFullAddress: getFullAddressSelector(state),
   }
 }
 const mapDispatch = {
