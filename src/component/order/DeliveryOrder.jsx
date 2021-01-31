@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {
   isFilledCardNumberSelector,
@@ -25,6 +25,8 @@ const DeliveryOrder = ({
   selectedPaymentType,
   selectDeliveryDate,
 }) => {
+  const [isSubmit, setIsSubmit] = useState(false)
+
   const getErrors = () => {
     const errors = []
 
@@ -73,15 +75,24 @@ const DeliveryOrder = ({
       : ``
   }
 
+  const handlerClick = () => {
+    setIsSubmit(true)
+  }
+
   return (
     <div className="mt-3 d-flex">
-      <button className="btn btn-primary" disabled={getErrors().length}>
+      <button
+        className="btn btn-primary"
+        disabled={getErrors().length}
+        onClick={handlerClick}
+      >
         заказать
       </button>
       <div className="ml-4">
         {getErrors().length ? START_MSG : ``}
         {getErrorsMessage(getErrors())}
       </div>
+      {isSubmit && `спасибо`}
     </div>
   )
 }
