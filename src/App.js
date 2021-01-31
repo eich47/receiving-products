@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="container w-50">
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename="/receiving-products-form">
           <h1 className="h1">Выберите способ получения товара</h1>
           <ul className="nav nav-pills my-4">
             <li className="nav-item">
