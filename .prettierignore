@@ -5,6 +5,6 @@
 .prettierignore
 .eslintcache
 dist/*
-build.*
+build/*
 .cache
 node_modules
