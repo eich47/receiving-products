@@ -1,6 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {BrowserRouter, Link, NavLink, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, NavLink, Route, Switch} from 'react-router-dom'
 import Choice from './component/Сhoice'
 import Delivery from './component/Delivery'
 import PickUp from './component/PickUp'
