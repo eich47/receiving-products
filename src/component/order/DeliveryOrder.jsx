@@ -13,7 +13,7 @@ const START_MSG = `Осталось заполнить `
 
 const ErrorField = {
   ADDRESS: `адрес доставки`,
-  DATE: `дата доставки`,
+  DATE: `дату доставки`,
   CARD: `номер карты`,
   PHONE: `телефон`,
 }
