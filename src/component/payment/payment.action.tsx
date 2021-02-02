@@ -1,8 +1,7 @@
-export const SET_PHONE = 'PAYMENT/SET_PHONE'
-export const SET_CARD = 'PAYMENT/SET_CARD'
-
 //установить телефон
-export const setPhone = (phone) => {
+import {PaymentActionTypes, SET_CARD, SET_PHONE} from './types'
+
+export function setPhone(phone: string): PaymentActionTypes {
   return {
     type: SET_PHONE,
     payload: {
@@ -12,7 +11,7 @@ export const setPhone = (phone) => {
 }
 
 //установить номер карты
-export const setCard = (card) => {
+export function setCard(card: string): PaymentActionTypes {
   return {
     type: SET_CARD,
     payload: {

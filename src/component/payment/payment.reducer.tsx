@@ -1,11 +1,13 @@
-import {SET_CARD, SET_PHONE} from './payment.action'
-
-const initialState = {
+import {PaymentActionTypes, PaymentState, SET_CARD, SET_PHONE} from './types'
+const initialState: PaymentState = {
   phone: null,
   card: null,
 }
 
-const paymentReducer = (state = initialState, action) => {
+const paymentReducer = (
+  state = initialState,
+  action: PaymentActionTypes
+): PaymentState => {
   switch (action.type) {
     case SET_PHONE: {
       return {
