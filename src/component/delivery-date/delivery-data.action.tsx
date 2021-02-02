@@ -1,10 +1,10 @@
-export const SET_DELIVERY_DATA = 'DELIVERY_DATA/SET_DELIVERY_DATA'
+import {DeliveryDateActionTypes, SET_DELIVERY_DATE} from './types'
 
-export const setDeliveryData = (date) => {
+export function setDeliveryData(deliveryDate: string): DeliveryDateActionTypes {
   return {
-    type: SET_DELIVERY_DATA,
+    type: SET_DELIVERY_DATE,
     payload: {
-      date,
+      deliveryDate,
     },
   }
 }
