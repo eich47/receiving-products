@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {selectAddressByCity, getFullAddressSelector} from './selector.selector'
 import * as selectorActions from './selector.action'
+import PropTypes from 'prop-types'
 
 const SELECTED_MENU_ITEM = 'red'
 
@@ -42,6 +43,11 @@ class SelectorStreetHouse extends React.Component {
       </div>
     )
   }
+}
+
+SelectorStreetHouse.propTypes = {
+  title: PropTypes.string.isRequired,
+  addressData: PropTypes.arrayOf(PropTypes.object),
 }
 
 const mapState = (state) => {

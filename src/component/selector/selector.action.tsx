@@ -7,6 +7,7 @@ import {
   SET_SELECTED_CITY,
   SET_SELECTED_STREET_HOUSE,
   SelectorActionsType,
+  CLEAR_SELECTED_STREET_HOUSE,
 } from './types'
 import {ThunkAction} from 'redux-thunk'
 import {Action} from 'redux'
@@ -75,5 +76,12 @@ export function setPickUpPaymentType(
 export function clearExistAddressData(): SelectorActionsType {
   return {
     type: CLEAR_EXIST_ADDRESS_DATA,
+  }
+}
+
+//удалим выбранный ранее адресс(улицу и дом)
+export function clearSelectedStreetHouse(): SelectorActionsType {
+  return {
+    type: CLEAR_SELECTED_STREET_HOUSE,
   }
 }

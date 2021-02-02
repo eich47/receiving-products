@@ -12,7 +12,7 @@ class Selector extends React.Component {
 
   handlerClick = (city) => {
     this.props.setSelectedCity(city)
-    this.props.setSelectedStreetHouse(null)
+    this.props.clearSelectedStreetHouse()
   }
 
   styleSelectedMenuItem = {borderColor: SELECTED_MENU_ITEM}
@@ -55,6 +55,7 @@ const mapDispatch = {
   fetchCityData: selectorActions.fetchCityDataAsync,
   setSelectedCity: selectorActions.setSelectedCity,
   setSelectedStreetHouse: selectorActions.setSelectedStreetHouse,
+  clearSelectedStreetHouse: selectorActions.clearSelectedStreetHouse,
 }
 
 const connector = connect(mapState, mapDispatch)

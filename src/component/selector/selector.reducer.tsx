@@ -1,11 +1,12 @@
 import {
   CITY_RECEIVED,
   CLEAR_EXIST_ADDRESS_DATA,
+  CLEAR_SELECTED_STREET_HOUSE,
+  SelectorActionsType,
+  SelectorState,
   SET_PICKUP_PAYMENT_TYPE,
   SET_SELECTED_CITY,
   SET_SELECTED_STREET_HOUSE,
-  SelectorState,
-  SelectorActionsType,
 } from './types'
 
 const initialState: SelectorState = {
@@ -73,7 +74,12 @@ const selectorReducer = (
         addressData: [],
       }
     }
-
+    case CLEAR_SELECTED_STREET_HOUSE: {
+      return {
+        ...state,
+        selectedFullAddress: null,
+      }
+    }
     default:
       return state
   }

@@ -13,6 +13,8 @@ export const SET_SELECTED_CITY = 'SELECTOR/SET_SELECTED_CITY'
 export const SET_SELECTED_STREET_HOUSE = 'SELECTOR/SET_SELECTED_STREET_HOUSE'
 export const SET_PICKUP_PAYMENT_TYPE = 'SELECTOR/SET_PICKUP_PAYMENT_TYPE'
 export const CLEAR_EXIST_ADDRESS_DATA = 'SELECTOR/CLEAR_EXIST_ADDRESS_DATA'
+export const CLEAR_SELECTED_STREET_HOUSE =
+  'SELECTOR/CLEAR_SELECTED_STREET_HOUSE'
 
 interface CityReceivedAction {
   type: typeof CITY_RECEIVED
@@ -46,9 +48,14 @@ interface clearExistAddressData {
   type: typeof CLEAR_EXIST_ADDRESS_DATA
 }
 
+interface clearSelectedStreetHouse {
+  type: typeof CLEAR_SELECTED_STREET_HOUSE
+}
+
 export type SelectorActionsType =
   | CityReceivedAction
   | setSelectedCityAction
   | setSelectedStreetHouse
   | setPickupPaymentType
   | clearExistAddressData
+  | clearSelectedStreetHouse
