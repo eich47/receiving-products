@@ -8,10 +8,12 @@
 //     },
 //   },
 // }
-export const mappingAddress = (dataApi) => {
-  const result = []
+import {DataApi, LocalData} from '../../../shared/app_types'
+
+export const mappingAddress = (dataApi: Array<DataApi>) => {
+  const result: Array<LocalData> = []
   dataApi.forEach((item) => {
-    const address = {
+    const address: LocalData = {
       id: item.id,
       city: item.city,
       address: {

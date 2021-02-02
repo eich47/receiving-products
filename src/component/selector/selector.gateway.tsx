@@ -1,11 +1,12 @@
 import {mappingAddress} from './utils/addressMapper'
+import {DataApi} from '../../shared/app_types'
 
 const addressData = [
   {
     id: 1,
     city: 'Минск',
     street: 'тест улица 1',
-    house: '11',
+    house: 11,
   },
   {
     id: 2,
@@ -28,7 +29,7 @@ const addressData = [
 ]
 
 export const getCityData = () => {
-  return Promise.resolve(addressData).then((apiData) => {
+  return Promise.resolve(addressData).then((apiData: Array<DataApi>) => {
     return mappingAddress(apiData)
   })
 }

@@ -52,7 +52,7 @@ const mapState = (state) => {
 }
 
 const mapDispatch = {
-  fetchCityData: selectorActions.fetchCityData,
+  fetchCityData: selectorActions.fetchCityDataAsync,
   setSelectedCity: selectorActions.setSelectedCity,
   setSelectedStreetHouse: selectorActions.setSelectedStreetHouse,
 }

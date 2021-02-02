@@ -1,5 +1,7 @@
 //получуть все годода в которых есть доставка
-export const citySelector = (state) => {
+import {RootState} from '../../store'
+
+export const citySelector = (state: RootState) => {
   const city = state.selector.addressData.map((data) => {
     return data.city
   })
@@ -8,7 +10,7 @@ export const citySelector = (state) => {
 }
 
 //выбрать адресса относящиеся к выбранному городу
-export const selectAddressByCity = (state) => {
+export const selectAddressByCity = (state: RootState) => {
   const {selectedCity, addressData} = state.selector
 
   if (selectedCity === null) {
@@ -22,22 +24,22 @@ export const selectAddressByCity = (state) => {
 }
 
 //выбран ли адресс
-export const isSelectAddressSelector = (state) => {
+export const isSelectAddressSelector = (state: RootState) => {
   return state.selector.selectedFullAddress !== null
 }
 
 //способ оплаты
-export const selectedPaymentSelector = (state) => {
+export const selectedPaymentSelector = (state: RootState) => {
   return state.selector.selectedPaymentType
 }
 
 //получить выбранный год
-export const getSelectedCitySelector = (state) => {
+export const getSelectedCitySelector = (state: RootState) => {
   return state.selector.selectedCity
 }
 //получить выбранный адресс (улицу и дом)
-export const getFullAddressSelector = (state) => {
+export const getFullAddressSelector = (state: RootState) => {
   return state.selector.selectedFullAddress !== null
-    ? state.selector.selectedFullAddress[0]
+    ? state.selector.selectedFullAddress
     : {}
 }

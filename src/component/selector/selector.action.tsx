@@ -1,13 +1,19 @@
 import {getCityData} from './selector.gateway'
-
-export const CITY_RECEIVED = 'SELECTOR/CITY_RECEIVED'
-export const SET_SELECTED_CITY = 'SELECTOR/SET_SELECTED_CITY'
-export const SET_SELECTED_STREET_HOUSE = 'SELECTOR/SET_SELECTED_STREET_HOUSE'
-export const SET_PICKUP_PAYMENT_TYPE = 'SELECTOR/SET_PICKUP_PAYMENT_TYPE'
-export const CLEAR_EXIST_ADDRESS_DATA = 'SELECTOR/CLEAR_EXIST_ADDRESS_DATA'
+import {LocalData, PaymentType} from '../../shared/app_types'
+import {
+  CITY_RECEIVED,
+  CLEAR_EXIST_ADDRESS_DATA,
+  SET_PICKUP_PAYMENT_TYPE,
+  SET_SELECTED_CITY,
+  SET_SELECTED_STREET_HOUSE,
+  SelectorActionsType,
+} from './types'
+import {ThunkAction} from 'redux-thunk'
+import {Action} from 'redux'
+import {RootState} from '../../store'
 
 //помесить города в стор
-export const cityReceived = (cityData) => {
+export function cityReceived(cityData: Array<LocalData>): SelectorActionsType {
   return {
     type: CITY_RECEIVED,
     payload: {
@@ -17,7 +23,12 @@ export const cityReceived = (cityData) => {
 }
 
 //получить города
-export const fetchCityData = () => {
+export const fetchCityDataAsync = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  Action<string>
+> => {
   return function (dispatch, getState) {
     const {selectedCity} = getState().selector
     getCityData().then((cityData) => {
@@ -29,7 +40,7 @@ export const fetchCityData = () => {
 }
 
 //задать город для которого будут выводиться адреса
-export const setSelectedCity = (city) => {
+export function setSelectedCity(city: string): SelectorActionsType {
   return {
     type: SET_SELECTED_CITY,
     payload: {
@@ -39,7 +50,7 @@ export const setSelectedCity = (city) => {
 }
 
 //установить выбраный адресс (улица и дом)
-export const setSelectedStreetHouse = (addressId) => {
+export function setSelectedStreetHouse(addressId: number): SelectorActionsType {
   return {
     type: SET_SELECTED_STREET_HOUSE,
     payload: {
@@ -49,7 +60,9 @@ export const setSelectedStreetHouse = (addressId) => {
 }
 
 //установить вариант оплаты для самовывозе (карта/наличные)
-export const setPickUpPaymentType = (paymentType) => {
+export function setPickUpPaymentType(
+  paymentType: PaymentType
+): SelectorActionsType {
   return {
     type: SET_PICKUP_PAYMENT_TYPE,
     payload: {
@@ -59,7 +72,7 @@ export const setPickUpPaymentType = (paymentType) => {
 }
 
 //удалим существующие данные
-export const clearExistAddressData = () => {
+export function clearExistAddressData(): SelectorActionsType {
   return {
     type: CLEAR_EXIST_ADDRESS_DATA,
   }

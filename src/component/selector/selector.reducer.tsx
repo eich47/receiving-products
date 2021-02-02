@@ -4,16 +4,21 @@ import {
   SET_PICKUP_PAYMENT_TYPE,
   SET_SELECTED_CITY,
   SET_SELECTED_STREET_HOUSE,
-} from './selector.action'
+  SelectorState,
+  SelectorActionsType,
+} from './types'
 
-const initialData = {
+const initialState: SelectorState = {
   addressData: [],
   selectedCity: null,
   selectedFullAddress: null, //город, улица, дом
   selectedPaymentType: 'card', // какой вариант оплаты выбрал пользователь (наличные/карта), карта по умолчанию
 }
 
-const selectorReducer = (state = initialData, action) => {
+const selectorReducer = (
+  state = initialState,
+  action: SelectorActionsType
+): SelectorState => {
   switch (action.type) {
     case CITY_RECEIVED: {
       return {
@@ -37,18 +42,18 @@ const selectorReducer = (state = initialData, action) => {
     case SET_SELECTED_STREET_HOUSE: {
       const locationId = action.payload.addressId
       const {addressData} = state
-      const newSelectedStreetHouse = addressData.filter((address) => {
+      const [newSelectedStreetHouse] = addressData.filter((address) => {
         if (address.id === locationId) {
           return address
         } else {
           return false
         }
       })
-
+      //todo переделать логику, видно лушче отдельных экшен сделать
       let fullAddress = newSelectedStreetHouse
-      if (fullAddress.length === 0) {
-        fullAddress = null
-      }
+      // if (fullAddress.length === 0) {
+      //   fullAddress = null
+      // }
       return {
         ...state,
         selectedFullAddress: fullAddress,
