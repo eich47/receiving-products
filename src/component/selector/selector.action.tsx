@@ -40,7 +40,7 @@ export const fetchCityDataAsync = (): ThunkAction<
 }
 
 //задать город для которого будут выводиться адреса
-export function setSelectedCity(city: string): SelectorActionsType {
+export function setSelectedCity(city: string | null): SelectorActionsType {
   return {
     type: SET_SELECTED_CITY,
     payload: {

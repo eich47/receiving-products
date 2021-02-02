@@ -24,7 +24,7 @@ interface CityReceivedAction {
 interface setSelectedCityAction {
   type: typeof SET_SELECTED_CITY
   payload: {
-    city: string
+    city: string | null
   }
 }
 
