@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
+import {applyMiddleware, combineReducers, createStore} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import ReduxThunk from 'redux-thunk'
 import selectorReducer from './component/selector/selector.reducer'
