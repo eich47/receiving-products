@@ -1,9 +1,12 @@
-import {SET_ADDRESS} from './address.action'
+import {AddressActionTypes, IAddressState, SET_ADDRESS} from './types'
 
-const initialState = {
+const initialState: IAddressState = {
   address: ``,
 }
-const addressReducer = (state = initialState, action) => {
+const addressReducer = (
+  state = initialState,
+  action: AddressActionTypes
+): IAddressState => {
   switch (action.type) {
     case SET_ADDRESS: {
       return {

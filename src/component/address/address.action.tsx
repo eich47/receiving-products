@@ -1,6 +1,6 @@
-export const SET_ADDRESS = 'ADDRESS/SET_ADDRESS'
+import {AddressActionTypes, SET_ADDRESS} from './types'
 
-export const setAddress = (address) => {
+export function setAddress(address: string): AddressActionTypes {
   return {
     type: SET_ADDRESS,
     payload: {
