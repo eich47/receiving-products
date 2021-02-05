@@ -3,11 +3,13 @@ import Card from './Card'
 import Phone from './Phone'
 import PaymentInfo from './PaymentInfo'
 import * as paymentActions from './payment.action'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 
-const PaymentCard = (props) => {
+const PaymentCard = (props: Props) => {
   useEffect(() => {
+    // @ts-ignore
     props.setCard(null)
+    // @ts-ignore
     props.setPhone(null)
   })
   return (
@@ -24,5 +26,10 @@ const mapDispatch = {
   setPhone: paymentActions.setPhone,
 }
 const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux & {
+  text: string
+}
 
 export default connector(PaymentCard)
