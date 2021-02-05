@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {connect} from 'react-redux'
+import React, {ChangeEvent, SyntheticEvent, useState} from 'react'
+import {connect, ConnectedProps} from 'react-redux'
 import * as addressActions from './address.action'
 
 const MIN_LENGTH_ADDRESS = 5
@@ -7,15 +7,18 @@ const SUCCESS_CLASS = 'is-valid'
 const ERROR_CLASS = 'is-invalid'
 const INPUT_CLASS = 'form-control'
 
-const Address = ({title, setAddress}) => {
-  const [isCorrect, setIsCorrect] = useState(null)
+const Address = (props: Props) => {
+  const initState: boolean | null = null
+  const [isCorrect, setIsCorrect] = useState(initState)
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     if (value.length >= MIN_LENGTH_ADDRESS) {
-      setAddress(value)
+      props.setAddress(value)
+      // @ts-ignore
       setIsCorrect(true)
     } else {
+      // @ts-ignore
       setIsCorrect(false)
     }
   }
@@ -32,7 +35,7 @@ const Address = ({title, setAddress}) => {
   return (
     <div className="mt-3">
       <label className="d-block">
-        <span className="d-block">{title}</span>
+        <span className="d-block">{props.title}</span>
         <input className={getClass()} type="text" onChange={handleChange} />
       </label>
     </div>
@@ -44,5 +47,10 @@ const mapDispatch = {
 }
 
 const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux & {
+  title: string
+}
 
 export default connector(Address)
