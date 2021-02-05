@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import {
   isFilledCardNumberSelector,
   isFilledPhoneSelector,
@@ -9,6 +9,7 @@ import {
   selectedPaymentSelector,
 } from '../selector/selector.selector'
 import * as paymentTypes from '../payment/paymentTypes'
+import {RootState} from '../../store'
 
 const START_MSG = `Осталось заполнить `
 
@@ -19,15 +20,17 @@ const ErrorField = {
   PHONE: `телефон`,
 }
 
-const Order = ({
-  isFilledCardNumber,
-  isFilledPhone,
-  isSelectAddress,
-  selectedPaymentType,
-}) => {
+const Order = (props: Props) => {
+  const {
+    isFilledPhone,
+    isFilledCardNumber,
+    isSelectAddress,
+    selectedPaymentType,
+  } = props
+
   const [isSubmit, setIsSubmit] = useState(false)
 
-  const getErrors = () => {
+  const getErrors = (): string[] => {
     const errors = []
 
     if (selectedPaymentType === paymentTypes.paymentByCard) {
@@ -54,7 +57,7 @@ const Order = ({
     return errors
   }
 
-  const getErrorsMessage = (errors = []) => {
+  const getErrorsMessage = (errors: string[] = []): string => {
     return errors.length
       ? errors.reduce(
           (acc, cur, i, arr) => acc + (i < arr.length - 1 ? `, ` : ` и `) + cur
@@ -70,7 +73,7 @@ const Order = ({
     <div className="mt-3 d-flex">
       <button
         className="btn btn-primary"
-        disabled={getErrors().length}
+        disabled={!!getErrors().length}
         onClick={handlerClick}
       >
         заказать
@@ -84,7 +87,7 @@ const Order = ({
   )
 }
 
-const mapState = (state) => {
+const mapState = (state: RootState) => {
   return {
     isFilledCardNumber: isFilledCardNumberSelector(state),
     isFilledPhone: isFilledPhoneSelector(state),
@@ -93,6 +96,9 @@ const mapState = (state) => {
   }
 }
 
-const connector = connect(mapState, null)
+const connector = connect(mapState)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux
 
 export default connector(Order)

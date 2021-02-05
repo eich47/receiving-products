@@ -15,10 +15,10 @@ const PickUpPayment = (props: Props) => {
       <SectionTitle title={`Способ оплаты`} />
       <SelectorPickUpPay />
       {props.paymentType === paymentTypes.paymentByCard && (
-        <PaymentCard text={textForUser} />
+        <PaymentCard text={props.textForUser} />
       )}
-      {paymentType === paymentTypes.paymentByCash && (
-        <PaymentCash text={textForUser} />
+      {props.paymentType === paymentTypes.paymentByCash && (
+        <PaymentCash text={props.textForUser} />
       )}
       <Order />
     </div>
@@ -31,10 +31,12 @@ const mapState = (state: RootState) => {
   }
 }
 
-const connector = connect(mapState, null)
+const connector = connect(mapState)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-type Props = PropsFromRedux
+type Props = PropsFromRedux & {
+  textForUser: string
+}
 
 export default connector(PickUpPayment)
