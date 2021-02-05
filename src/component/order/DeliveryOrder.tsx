@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import {
   isFilledCardNumberSelector,
   isFilledPhoneSelector,
@@ -8,6 +8,7 @@ import {selectedPaymentSelector} from '../selector/selector.selector'
 import * as paymentTypes from '../payment/paymentTypes'
 import {selectTypedAddressSelector} from '../address/address.selector'
 import {deliveryDateSelector} from '../delivery-date/delivety-date.selector'
+import {RootState} from '../../store'
 
 const START_MSG = `Осталось заполнить `
 
@@ -18,16 +19,18 @@ const ErrorField = {
   PHONE: `телефон`,
 }
 
-const DeliveryOrder = ({
-  isFilledCardNumber,
-  isFilledPhone,
-  isSelectAddress,
-  selectedPaymentType,
-  selectDeliveryDate,
-}) => {
+const DeliveryOrder = (prors: Props) => {
+  const {
+    isFilledCardNumber,
+    isFilledPhone,
+    isSelectAddress,
+    selectedPaymentType,
+    selectDeliveryDate,
+  } = prors
+
   const [isSubmit, setIsSubmit] = useState(false)
 
-  const getErrors = () => {
+  const getErrors = (): string[] => {
     const errors = []
 
     if (selectedPaymentType === paymentTypes.paymentByCard) {
@@ -67,7 +70,7 @@ const DeliveryOrder = ({
     return errors
   }
 
-  const getErrorsMessage = (errors = []) => {
+  const getErrorsMessage = (errors: string[] = []): string => {
     return errors.length
       ? errors.reduce(
           (acc, cur, i, arr) => acc + (i < arr.length - 1 ? `, ` : ` и `) + cur
@@ -83,7 +86,7 @@ const DeliveryOrder = ({
     <div className="mt-3 d-flex">
       <button
         className="btn btn-primary"
-        disabled={getErrors().length}
+        disabled={!!getErrors().length}
         onClick={handlerClick}
       >
         заказать
@@ -97,7 +100,7 @@ const DeliveryOrder = ({
   )
 }
 
-const mapState = (state) => {
+const mapState = (state: RootState) => {
   return {
     isFilledCardNumber: isFilledCardNumberSelector(state),
     isFilledPhone: isFilledPhoneSelector(state),
@@ -107,6 +110,9 @@ const mapState = (state) => {
   }
 }
 
-const connector = connect(mapState, null)
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux
+
+const connector = connect(mapState)
 
 export default connector(DeliveryOrder)
