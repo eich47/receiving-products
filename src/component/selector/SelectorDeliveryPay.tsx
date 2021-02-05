@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import * as selectorActions from './selector.action'
+import {SelectorPaymentType} from './types'
+import {PaymentType} from '../../shared/app_types'
 
-function SelectorPickUpPay({setPickUpPaymentType}) {
-  const [payment] = useState([
-    {id: 1, name: 'Карта', code: 'card'},
-    {id: 2, name: 'Наличные курьеру', code: 'cash'},
-  ])
+function SelectorPickUpPay(props: Props) {
+  const initState: SelectorPaymentType[] = [
+    {id: 1, name: 'Карта', code: PaymentType.CARD},
+    {id: 2, name: 'Наличные курьеру', code: PaymentType.CASH},
+  ]
+  const [payment] = useState(initState)
 
   return (
     <div>
@@ -16,7 +19,7 @@ function SelectorPickUpPay({setPickUpPaymentType}) {
             className="nav-item mr-2"
             key={paymentItem.id}
             onClick={() => {
-              setPickUpPaymentType(paymentItem.code)
+              props.setPickUpPaymentType(paymentItem.code)
             }}
           >
             <button type="button" className="btn btn-outline-primary">
@@ -34,5 +37,8 @@ const mapDispatch = {
 }
 
 const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux
 
 export default connector(SelectorPickUpPay)
