@@ -1,16 +1,17 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import {citySelector, getSelectedCitySelector} from './selector.selector'
 import * as selectorActions from './selector.action'
+import {RootState} from '../../store'
 
 const SELECTED_MENU_ITEM = 'red'
 
-class Selector extends React.Component {
+class Selector extends React.Component<Props, RootState> {
   componentDidMount() {
     this.props.fetchCityData()
   }
 
-  handlerClick = (city) => {
+  handlerClick = (city: string) => {
     this.props.setSelectedCity(city)
     this.props.clearSelectedStreetHouse()
   }
@@ -44,7 +45,7 @@ class Selector extends React.Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = (state: RootState) => {
   return {
     cityData: citySelector(state),
     selectedCity: getSelectedCitySelector(state),
@@ -59,5 +60,10 @@ const mapDispatch = {
 }
 
 const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux & {
+  title: string
+}
 
 export default connector(Selector)
