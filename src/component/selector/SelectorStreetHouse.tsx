@@ -1,12 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import {selectAddressByCity, getFullAddressSelector} from './selector.selector'
 import * as selectorActions from './selector.action'
-import PropTypes from 'prop-types'
+import {RootState} from '../../store'
 
 const SELECTED_MENU_ITEM = 'red'
 
-class SelectorStreetHouse extends React.Component {
+class SelectorStreetHouse extends React.Component<Props, RootState> {
   styleSelectedMenuItem = {borderColor: SELECTED_MENU_ITEM}
 
   render() {
@@ -30,7 +30,7 @@ class SelectorStreetHouse extends React.Component {
                 type="button"
                 className="btn btn-outline-primary"
                 style={
-                  loc.id === selectedFullAddress.id
+                  loc.id === selectedFullAddress?.id
                     ? this.styleSelectedMenuItem
                     : {}
                 }
@@ -45,12 +45,7 @@ class SelectorStreetHouse extends React.Component {
   }
 }
 
-SelectorStreetHouse.propTypes = {
-  title: PropTypes.string.isRequired,
-  addressData: PropTypes.arrayOf(PropTypes.object),
-}
-
-const mapState = (state) => {
+const mapState = (state: RootState) => {
   return {
     addressData: selectAddressByCity(state),
     selectedFullAddress: getFullAddressSelector(state),
@@ -61,5 +56,10 @@ const mapDispatch = {
 }
 
 const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux & {
+  title: string
+}
 
 export default connector(SelectorStreetHouse)

@@ -41,5 +41,5 @@ export const getSelectedCitySelector = (state: RootState) => {
 export const getFullAddressSelector = (state: RootState) => {
   return state.selector.selectedFullAddress !== null
     ? state.selector.selectedFullAddress
-    : {}
+    : null
 }
