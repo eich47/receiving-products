@@ -1,11 +1,15 @@
 import React from 'react'
 
-const SectionTitle = ({title}) => {
+const SectionTitle = (props: Props) => {
   return (
     <>
-      <h3 className="h3 my-3">{title}</h3>
+      <h3 className="h3 my-3">{props.title}</h3>
     </>
   )
+}
+
+type Props = {
+  title: string
 }
 
 export default SectionTitle
