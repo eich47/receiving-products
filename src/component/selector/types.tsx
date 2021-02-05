@@ -61,7 +61,7 @@ export type SelectorActionsType =
   | clearSelectedStreetHouse
 
 //варианты оплаты за товара
-export interface SelectorPaymentType {
+export interface ISelectorPaymentType {
   id: number
   name: string
   code: PaymentType

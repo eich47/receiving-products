@@ -4,12 +4,12 @@ import * as selectorActions from './selector.action'
 import {selectedPaymentSelector} from './selector.selector'
 import {RootState} from '../../store'
 import {PaymentType} from '../../shared/app_types'
-import {SelectorPaymentType} from './types'
+import {ISelectorPaymentType} from './types'
 
 const SELECTED_MENU_ITEM = 'red'
 
 function SelectorPickUpPay(props: Props) {
-  const initState: SelectorPaymentType[] = [
+  const initState: ISelectorPaymentType[] = [
     {id: 1, name: 'Карта', code: PaymentType.CARD},
     {id: 2, name: 'Наличные', code: PaymentType.CASH},
   ]

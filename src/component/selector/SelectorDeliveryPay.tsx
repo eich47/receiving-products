@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {connect, ConnectedProps} from 'react-redux'
 import * as selectorActions from './selector.action'
-import {SelectorPaymentType} from './types'
+import {ISelectorPaymentType} from './types'
 import {PaymentType} from '../../shared/app_types'
 
 function SelectorPickUpPay(props: Props) {
-  const initState: SelectorPaymentType[] = [
+  const initState: ISelectorPaymentType[] = [
     {id: 1, name: 'Карта', code: PaymentType.CARD},
     {id: 2, name: 'Наличные курьеру', code: PaymentType.CASH},
   ]
