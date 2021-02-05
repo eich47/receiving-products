@@ -1,14 +1,16 @@
 import React, {useState} from 'react'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import * as selectorActions from './selector.action'
 import {selectedPaymentSelector} from './selector.selector'
+import {RootState} from '../../store'
+import {PaymentType} from '../../shared/app_types'
 
 const SELECTED_MENU_ITEM = 'red'
 
-function SelectorPickUpPay({setPickUpPaymentType, getSelectedPaymentType}) {
+function SelectorPickUpPay(props: Props) {
   const [payment] = useState([
-    {id: 1, name: 'Карта', code: 'card'},
-    {id: 2, name: 'Наличные', code: 'cash'},
+    {id: 1, name: 'Карта', code: PaymentType.CARD},
+    {id: 2, name: 'Наличные', code: PaymentType.CASH},
   ])
 
   const styleSelectedMenuItem = {borderColor: SELECTED_MENU_ITEM}
@@ -21,14 +23,14 @@ function SelectorPickUpPay({setPickUpPaymentType, getSelectedPaymentType}) {
             className="nav-item mr-2"
             key={paymentItem.id}
             onClick={() => {
-              setPickUpPaymentType(paymentItem.code)
+              props.setPickUpPaymentType(paymentItem.code)
             }}
           >
             <button
               type="button"
               className="btn btn-outline-primary"
               style={
-                getSelectedPaymentType === paymentItem.code
+                props.getSelectedPaymentType === paymentItem.code
                   ? styleSelectedMenuItem
                   : {}
               }
@@ -42,7 +44,7 @@ function SelectorPickUpPay({setPickUpPaymentType, getSelectedPaymentType}) {
   )
 }
 
-const mapState = (state) => {
+const mapState = (state: RootState) => {
   return {
     getSelectedPaymentType: selectedPaymentSelector(state),
   }
@@ -53,5 +55,8 @@ const mapDispatch = {
 }
 
 const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux
 
 export default connector(SelectorPickUpPay)

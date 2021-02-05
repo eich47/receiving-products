@@ -8,12 +8,13 @@ import {
   SET_SELECTED_CITY,
   SET_SELECTED_STREET_HOUSE,
 } from './types'
+import {PaymentType} from '../../shared/app_types'
 
 const initialState: SelectorState = {
   addressData: [],
   selectedCity: null,
   selectedFullAddress: null, //город, улица, дом
-  selectedPaymentType: 'card', // какой вариант оплаты выбрал пользователь (наличные/карта), карта по умолчанию
+  selectedPaymentType: PaymentType.CARD, // какой вариант оплаты выбрал пользователь (наличные/карта), карта по умолчанию
 }
 
 const selectorReducer = (

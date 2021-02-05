@@ -18,4 +18,7 @@ export type LocalData = {
 }
 
 //тип оплаты за товар
-export type PaymentType = 'card' | 'cash'
+export enum PaymentType {
+  CARD = 'card',
+  CASH = 'cash',
+}
