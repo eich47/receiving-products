@@ -59,3 +59,10 @@ export type SelectorActionsType =
   | setPickupPaymentType
   | clearExistAddressData
   | clearSelectedStreetHouse
+
+//варианты оплаты за товара
+export interface SelectorPaymentType {
+  id: number
+  name: string
+  code: PaymentType
+}
