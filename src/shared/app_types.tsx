@@ -1,4 +1,4 @@
-//данные от апи
+//тестовые данные от апи
 export type DataApi = {
   id: number
   city: string

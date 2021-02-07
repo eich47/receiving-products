@@ -1,5 +1,4 @@
-import {mappingAddress} from './utils/addressMapper'
-import {DataApi} from '../../shared/app_types'
+import {DataApi, LocalData} from '../../shared/app_types'
 
 const addressData = [
   {
@@ -29,7 +28,88 @@ const addressData = [
 ]
 
 export const getCityData = () => {
-  return Promise.resolve(addressData).then((apiData: Array<DataApi>) => {
-    return mappingAddress(apiData)
-  })
+  //получим тестовые данные
+  return new TestData(new RequestTestDataApi(), new TestMapper()).getData()
+}
+
+//получить адресса для приложения
+interface IGetAddressDataApi {
+  getAddressList(): any
+}
+
+//получить тестовые данные
+class RequestTestDataApi implements IGetAddressDataApi {
+  getAddressList(): Promise<DataApi[]> {
+    console.log('test data')
+    return Promise.resolve(addressData)
+  }
+}
+
+//получить данные с реального апи
+class RequestRealDataApi implements IGetAddressDataApi {
+  getAddressList(): any {
+    console.log('real data')
+    return new Error('no RequestRealDataApi')
+  }
+}
+
+//**********************************************
+
+//замепить данные с апи к данных используемые в приложении
+interface IApiDataToLocalDataMapper {
+  mapping(apiData: DataApi[]): Promise<LocalData[]>
+}
+//мэпер для тестовых данных
+class TestMapper implements IApiDataToLocalDataMapper {
+  mapping(apiData: DataApi[]): Promise<LocalData[]> {
+    return new Promise((resolve, reject) => {
+      const result: Array<LocalData> = []
+      apiData.forEach((item) => {
+        const address: LocalData = {
+          id: item.id,
+          city: item.city,
+          address: {
+            city: {
+              street: item.street,
+              house: item.house,
+            },
+          },
+        }
+        result.push(address)
+      })
+
+      if (!result.length) {
+        reject('не удалось замепить тестовые данные')
+      }
+
+      resolve(result)
+    })
+  }
+}
+//мэпер для данных с реального апи
+class RealDataMapper implements IApiDataToLocalDataMapper {
+  mapping(apiData: DataApi[]): Promise<LocalData[]> {
+    return Promise.reject('not RealDataMapper')
+  }
+}
+
+//************************************
+
+//метод который будет вызывать клиент
+interface IData {
+  getData(): Promise<LocalData[]>
+}
+
+//тестовые данные для клиента
+class TestData implements IData {
+  constructor(
+    private requestData: IGetAddressDataApi,
+    private mapper: IApiDataToLocalDataMapper
+  ) {}
+
+  getData(): Promise<LocalData[]> {
+    return this.requestData
+      .getAddressList()
+      .then((data: DataApi[]) => this.mapper.mapping(data))
+  }
 }

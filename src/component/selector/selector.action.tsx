@@ -32,11 +32,15 @@ export const fetchCityDataAsync = (): ThunkAction<
 > => {
   return function (dispatch, getState) {
     const {selectedCity} = getState().selector
-    getCityData().then((cityData) => {
-      dispatch(clearExistAddressData())
-      dispatch(cityReceived(cityData))
-      dispatch(setSelectedCity(selectedCity))
-    })
+    getCityData()
+      .then((cityData) => {
+        dispatch(clearExistAddressData())
+        dispatch(cityReceived(cityData))
+        dispatch(setSelectedCity(selectedCity))
+      })
+      .catch((e) => {
+        console.log('Error ', e)
+      })
   }
 }
 
