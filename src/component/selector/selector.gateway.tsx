@@ -1,4 +1,5 @@
 import {DataApi, LocalData} from '../../shared/app_types'
+import axios from '../../shared/axios-selector'
 
 const addressData = [
   {
@@ -29,7 +30,7 @@ const addressData = [
 
 export const getCityData = () => {
   //получим тестовые данные
-  return new TestData(new RequestTestDataApi(), new TestMapper()).getData()
+  return new TestData(new RequestRealDataApi(), new TestMapper()).getData()
 }
 
 //получить адресса для приложения
@@ -47,9 +48,12 @@ class RequestTestDataApi implements IGetAddressDataApi {
 
 //получить данные с реального апи
 class RequestRealDataApi implements IGetAddressDataApi {
-  getAddressList(): any {
+  getAddressList(): Promise<DataApi[]> {
     console.log('real data')
-    return new Error('no RequestRealDataApi')
+    return axios.get('/all-address.json').then((result: any) => {
+      const data = result.data
+      return JSON.parse(data)
+    })
   }
 }
 

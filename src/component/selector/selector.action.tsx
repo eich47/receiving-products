@@ -3,11 +3,14 @@ import {LocalData, PaymentType} from '../../shared/app_types'
 import {
   CITY_RECEIVED,
   CLEAR_EXIST_ADDRESS_DATA,
+  CLEAR_SELECTED_STREET_HOUSE,
+  FETCH_ADDRESS_ERROR,
+  FETCH_ADDRESS_START,
+  FETCH_ADDRESS_SUCCESS,
+  SelectorActionsType,
   SET_PICKUP_PAYMENT_TYPE,
   SET_SELECTED_CITY,
   SET_SELECTED_STREET_HOUSE,
-  SelectorActionsType,
-  CLEAR_SELECTED_STREET_HOUSE,
 } from './types'
 import {ThunkAction} from 'redux-thunk'
 import {Action} from 'redux'
@@ -31,15 +34,18 @@ export const fetchCityDataAsync = (): ThunkAction<
   Action<string>
 > => {
   return function (dispatch, getState) {
+    dispatch(fetchAddressStart())
     const {selectedCity} = getState().selector
     getCityData()
       .then((cityData) => {
+        dispatch(fetchAddressSuccess())
         dispatch(clearExistAddressData())
         dispatch(cityReceived(cityData))
         dispatch(setSelectedCity(selectedCity))
       })
       .catch((e) => {
         console.log('Error ', e)
+        dispatch(fetchAddressError(e))
       })
   }
 }
@@ -87,5 +93,24 @@ export function clearExistAddressData(): SelectorActionsType {
 export function clearSelectedStreetHouse(): SelectorActionsType {
   return {
     type: CLEAR_SELECTED_STREET_HOUSE,
+  }
+}
+
+export function fetchAddressStart(): SelectorActionsType {
+  return {
+    type: FETCH_ADDRESS_START,
+  }
+}
+
+export function fetchAddressSuccess(): SelectorActionsType {
+  return {
+    type: FETCH_ADDRESS_SUCCESS,
+  }
+}
+
+export function fetchAddressError(e: any): SelectorActionsType {
+  return {
+    type: FETCH_ADDRESS_ERROR,
+    error: e,
   }
 }

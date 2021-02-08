@@ -2,6 +2,9 @@ import {
   CITY_RECEIVED,
   CLEAR_EXIST_ADDRESS_DATA,
   CLEAR_SELECTED_STREET_HOUSE,
+  FETCH_ADDRESS_ERROR,
+  FETCH_ADDRESS_START,
+  FETCH_ADDRESS_SUCCESS,
   SelectorActionsType,
   SelectorState,
   SET_PICKUP_PAYMENT_TYPE,
@@ -15,6 +18,8 @@ const initialState: SelectorState = {
   selectedCity: null,
   selectedFullAddress: null, //город, улица, дом
   selectedPaymentType: PaymentType.CARD, // какой вариант оплаты выбрал пользователь (наличные/карта), карта по умолчанию
+  isLoading: false,
+  error: null,
 }
 
 const selectorReducer = (
@@ -79,6 +84,25 @@ const selectorReducer = (
       return {
         ...state,
         selectedFullAddress: null,
+      }
+    }
+    case FETCH_ADDRESS_START: {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
+    case FETCH_ADDRESS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      }
+    }
+    case FETCH_ADDRESS_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
       }
     }
     default:

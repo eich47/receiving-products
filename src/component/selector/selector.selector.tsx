@@ -43,3 +43,10 @@ export const getFullAddressSelector = (state: RootState) => {
     ? state.selector.selectedFullAddress
     : null
 }
+export const isLoadingSelector = (state: RootState) => {
+  return state.selector.isLoading
+}
+
+export const isErrorSelector = (state: RootState) => {
+  return state.selector.error !== null
+}

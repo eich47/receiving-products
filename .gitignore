@@ -24,3 +24,5 @@ yarn-error.log*
 
 .idea/
 .eslintcache
+
+src/api_const/
