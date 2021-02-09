@@ -7,8 +7,10 @@ import {connect, ConnectedProps} from 'react-redux'
 
 const PaymentCard = (props: Props) => {
   useEffect(() => {
-    props.cleanCard()
-    props.cleanPhone()
+    return () => {
+      props.cleanCard()
+      props.cleanPhone()
+    }
   })
   return (
     <div className="mt-3">

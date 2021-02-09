@@ -6,7 +6,9 @@ import {connect, ConnectedProps} from 'react-redux'
 
 const PaymentCash = (props: Props) => {
   useEffect(() => {
-    props.cleanPhone()
+    return () => {
+      props.cleanPhone()
+    }
   })
   return (
     <div>
