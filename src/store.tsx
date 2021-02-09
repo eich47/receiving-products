@@ -16,10 +16,11 @@ const reducers = combineReducers({
 })
 
 // const enchancer = composeEnhancers(applyMiddleware(ReduxThunk))
+const composeEnhancers = composeWithDevTools({trace: true})
 
 const store = createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(ReduxThunk))
+  composeEnhancers(applyMiddleware(ReduxThunk))
 )
 
 export default store
