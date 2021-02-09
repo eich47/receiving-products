@@ -1,4 +1,12 @@
-import {PaymentActionTypes, PaymentState, SET_CARD, SET_PHONE} from './types'
+import {
+  CLEAN_CARD,
+  CLEAN_PHONE,
+  PaymentActionTypes,
+  PaymentState,
+  SET_CARD,
+  SET_PHONE,
+} from './types'
+
 const initialState: PaymentState = {
   phone: null,
   card: null,
@@ -21,6 +29,16 @@ const paymentReducer = (
         card: action.payload.card,
       }
     }
+    case CLEAN_CARD:
+      return {
+        ...state,
+        card: null,
+      }
+    case CLEAN_PHONE:
+      return {
+        ...state,
+        phone: null,
+      }
     default:
       return state
   }

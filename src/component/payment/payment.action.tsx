@@ -1,5 +1,11 @@
 //установить телефон
-import {PaymentActionTypes, SET_CARD, SET_PHONE} from './types'
+import {
+  CLEAN_CARD,
+  CLEAN_PHONE,
+  PaymentActionTypes,
+  SET_CARD,
+  SET_PHONE,
+} from './types'
 
 export function setPhone(phone: string): PaymentActionTypes {
   return {
@@ -17,5 +23,17 @@ export function setCard(card: string): PaymentActionTypes {
     payload: {
       card,
     },
+  }
+}
+
+export function cleanCard(): PaymentActionTypes {
+  return {
+    type: CLEAN_CARD,
+  }
+}
+
+export function cleanPhone(): PaymentActionTypes {
+  return {
+    type: CLEAN_PHONE,
   }
 }

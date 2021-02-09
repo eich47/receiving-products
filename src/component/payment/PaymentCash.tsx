@@ -6,8 +6,7 @@ import {connect, ConnectedProps} from 'react-redux'
 
 const PaymentCash = (props: Props) => {
   useEffect(() => {
-    // @ts-ignore
-    props.setPhone(null)
+    props.cleanPhone()
   })
   return (
     <div>
@@ -18,7 +17,7 @@ const PaymentCash = (props: Props) => {
 }
 
 const mapDispatch = {
-  setPhone: paymentActions.setPhone,
+  cleanPhone: paymentActions.cleanPhone,
 }
 const connector = connect(null, mapDispatch)
 

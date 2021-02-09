@@ -5,6 +5,8 @@ export interface PaymentState {
 
 export const SET_PHONE = 'PAYMENT/SET_PHONE'
 export const SET_CARD = 'PAYMENT/SET_CARD'
+export const CLEAN_PHONE = 'PAYMENT/CLEAN_PHONE'
+export const CLEAN_CARD = 'PAYMENT/CLEAN_CARD'
 
 interface ISetPhoneAction {
   type: typeof SET_PHONE
@@ -20,4 +22,15 @@ interface ISetCardAction {
   }
 }
 
-export type PaymentActionTypes = ISetCardAction | ISetPhoneAction
+interface ICleanPhone {
+  type: typeof CLEAN_PHONE
+}
+interface ICleanCard {
+  type: typeof CLEAN_CARD
+}
+
+export type PaymentActionTypes =
+  | ISetCardAction
+  | ISetPhoneAction
+  | ICleanPhone
+  | ICleanCard
