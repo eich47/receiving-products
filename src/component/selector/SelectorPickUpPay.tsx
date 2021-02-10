@@ -1,48 +1,25 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {connect, ConnectedProps} from 'react-redux'
 import * as selectorActions from './selector.action'
 import {selectedPaymentSelector} from './selector.selector'
 import {RootState} from '../../store'
 import {PaymentType} from '../../shared/app_types'
 import {ISelectorPaymentType} from './types'
+import SelectorPayUi from './SelectorPayUI'
 
-const SELECTED_MENU_ITEM = 'red'
-
+//выбор вида оплаты при самовывозе товара
 function SelectorPickUpPay(props: Props) {
-  const initState: ISelectorPaymentType[] = [
+  const paymentTypePickIpList: ISelectorPaymentType[] = [
     {id: 1, name: 'Карта', code: PaymentType.CARD},
     {id: 2, name: 'Наличные', code: PaymentType.CASH},
   ]
-  const [payment] = useState(initState)
-
-  const styleSelectedMenuItem = {borderColor: SELECTED_MENU_ITEM}
 
   return (
-    <div>
-      <ul className="nav">
-        {payment.map((paymentItem) => (
-          <li
-            className="nav-item mr-2"
-            key={paymentItem.id}
-            onClick={() => {
-              props.setPickUpPaymentType(paymentItem.code)
-            }}
-          >
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              style={
-                props.getSelectedPaymentType === paymentItem.code
-                  ? styleSelectedMenuItem
-                  : {}
-              }
-            >
-              {paymentItem.name}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <SelectorPayUi
+      payment={paymentTypePickIpList}
+      setPickUpPaymentType={props.setPickUpPaymentType}
+      getSelectedPaymentType={props.getSelectedPaymentType}
+    />
   )
 }
 
